@@ -4,7 +4,7 @@ requires "List::UtilsBy" => "0";
 requires "MetaCPAN::Client" => "0";
 requires "Moose" => "0";
 requires "experimental" => "0";
-requires "perl" => "v5.20.0";
+requires "perl" => "v5.22.0";
 requires "warnings" => "0";
 
 on 'test' => sub {
@@ -17,6 +17,7 @@ on 'test' => sub {
   requires "Test::Deep" => "0";
   requires "Test::MockObject" => "0";
   requires "Test::More" => "0.96";
+  requires "blib" => "1.01";
   requires "strict" => "0";
 };
 

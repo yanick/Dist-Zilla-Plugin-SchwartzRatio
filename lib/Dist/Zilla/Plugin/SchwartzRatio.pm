@@ -31,7 +31,7 @@ CLI utility to list and help you delete easily your distributions on CPAN.
 
 =cut
 
-use 5.20.0;
+use 5.22.0;
 use warnings;
 
 use List::UtilsBy qw/ sort_by /;

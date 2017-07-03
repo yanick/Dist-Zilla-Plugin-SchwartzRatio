@@ -19,12 +19,23 @@ the releases of the distribution still kickign around on CPAN,
 just to give an idea to the author that maybe it's time
 to do some cleanup.
 
+=head1 SEE ALSO
+
+=over
+
+=item L<App-PAUSE-cleanup|https://metacpan.org/release/App-PAUSE-cleanup> 
+
+CLI utility to list and help you delete easily your distributions on CPAN.
+
+=back
+
 =cut
 
-use strict;
+use 5.20.0;
 use warnings;
 
-use LWP::Simple;
+use List::UtilsBy qw/ sort_by /;
+use MetaCPAN::Client;
 
 use Moose;
 
@@ -33,27 +44,45 @@ with qw/
     Dist::Zilla::Role::AfterRelease
 /;
 
-sub after_release {
-    my $self = shift;
+use experimental 'signatures';
 
-    # I'm going to hell for that...
+has mcpan => (
+    is      => 'ro',
+    lazy    => 1,
+    default => sub { MetaCPAN::Client->new },
+);
 
-    my $page = join "", LWP::Simple::get( 'http://search.cpan.org/dist/' .
-        $self->zilla->name );
+has releases => (
+    is => 'ro',
+    traits => [ 'Array' ],
+    handles => {
+        all_releases => 'elements',
+        nbr_releases => 'count',
+    },
+    lazy => 1,
+    default => sub($self) {
+        
+        my $releases = $self->mcpan->release({
+            distribution => $self->zilla->name
+        });
+        my @releases;
 
-    my @releases;
+        while( my $r = $releases->next ) {
+            my( $version, $date ) = map { $r->$_ } qw/ version date /;
+            $date =~ s/T.*//;
+            push @releases, [ 'v'.$version, $date ];
+        }
 
-    push @releases, $1 if $page =~ m#This Release.*?<td.*?>(.*?)</td>#s;
+        return [ sort_by { $_->[1] } @releases ];
+    },
+);
 
-    if ( $page =~ m#Other Releases.*?<select name="url">(.*?)</select>#s ) {
-        my $inner = $&;
-        push @releases, map { my $x = $_; $x =~ s/&nbsp;&nbsp;--&nbsp;&nbsp;/, /; $x } $inner =~ />(.*?)</g;
-    }
+sub after_release($self,@) {
 
-    $self->log( @releases . " old releases are lingering on CPAN" );
-    $self->log( "\t" . $_ ) for @releases;
+    $self->log( $self->nbr_releases . " old releases are lingering on CPAN" );
+    $self->log( "\t" . join ', ', @$_ ) for $self->all_releases;
 }
 
 __PACKAGE__->meta->make_immutable;
-no Moose;
+
 1;

@@ -19,6 +19,16 @@ the releases of the distribution still kickign around on CPAN,
 just to give an idea to the author that maybe it's time
 to do some cleanup.
 
+=head1 SEE ALSO
+
+=over
+
+=item L<App-PAUSE-cleanup|https://metacpan.org/release/App-PAUSE-cleanup> 
+
+CLI utility to list and help you delete easily your distributions on CPAN.
+
+=back
+
 =cut
 
 use strict;

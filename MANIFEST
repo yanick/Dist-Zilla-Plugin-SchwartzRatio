@@ -1,5 +1,4 @@
 AUTHOR_PLEDGE
-CONTRIBUTORS
 Changes
 INSTALL
 LICENSE
@@ -17,4 +16,5 @@ lib/Dist/Zilla/Plugin/SchwartzRatio.pm
 t/00-compile.t
 t/00-report-prereqs.dd
 t/00-report-prereqs.t
+t/basic.t
 xt/release/unused-vars.t

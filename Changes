@@ -6,6 +6,7 @@ Revision history for {{$dist->name}}
  [BUG FIXES]
 
  [DOCUMENTATION]
+ - Fix typo (GH#3, brian greenfield)
 
  [ENHANCEMENTS]
 

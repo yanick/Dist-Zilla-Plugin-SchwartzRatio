@@ -15,7 +15,7 @@ a single distribution, it boils down to the less exciting
 number of previous releases still on CPAN. 
 
 After a successful release, the plugin displays
-the releases of the distribution still kickign around on CPAN,
+the releases of the distribution still kicking around on CPAN,
 just to give an idea to the author that maybe it's time
 to do some cleanup.
 

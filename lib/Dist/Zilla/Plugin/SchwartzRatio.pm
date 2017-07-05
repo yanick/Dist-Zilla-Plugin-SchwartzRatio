@@ -31,7 +31,8 @@ CLI utility to list and help you delete easily your distributions on CPAN.
 
 =cut
 
-use 5.22.0;
+use 5.14.0;
+use strict;
 use warnings;
 
 use List::UtilsBy qw/ sort_by /;
@@ -43,8 +44,6 @@ with qw/
     Dist::Zilla::Role::Plugin
     Dist::Zilla::Role::AfterRelease
 /;
-
-use experimental 'signatures';
 
 has mcpan => (
     is      => 'ro',
@@ -60,7 +59,8 @@ has releases => (
         nbr_releases => 'count',
     },
     lazy => 1,
-    default => sub($self) {
+    default => sub {
+        my $self = shift;
         
         my $releases = $self->mcpan->release({
             distribution => $self->zilla->name
@@ -77,7 +77,8 @@ has releases => (
     },
 );
 
-sub after_release($self,@) {
+sub after_release {
+    my $self = shift;
 
     $self->log( $self->nbr_releases . " old releases are lingering on CPAN" );
     $self->log( "\t" . join ', ', @$_ ) for $self->all_releases;

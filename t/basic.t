@@ -18,12 +18,14 @@ package FakeRelease {
 }
 
 my $fake_client = Test::MockObject->new;
-$fake_client->set_always( release => lazy_fixed_list( 
-        map { FakeRelease->new( 
-            version => '1.1.'.$_,
-            date => '2017-01-0'.$_
-        ) } 1..3
-)  );
+my $releases = Test::MockObject->new;
+$releases->set_series( next 
+    => map { 
+        FakeRelease->new( version => '1.1.'.$_, date => '2017-01-0'.$_) 
+    } 1..3 
+);
+
+$fake_client->set_always( release => $releases );
 
 { 
     no warnings; 

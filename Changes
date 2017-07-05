@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - drop the requirement to perl 5.14.
+
  [API CHANGES]
 
  [BUG FIXES]

@@ -4,6 +4,7 @@ Revision history for {{$dist->name}}
   [ API CHANGES ]
 
   [ BUG FIXES ]
+    - don't count the releases on backpan.
 
   [ DOCUMENTATION ]
 

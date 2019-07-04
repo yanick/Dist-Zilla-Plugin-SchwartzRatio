@@ -12,7 +12,7 @@ In dist.ini:
 The Schwartz Ratio of CPAN is the number of number of latest
 releases over the total number of releases that CPAN has. For
 a single distribution, it boils down to the less exciting
-number of previous releases still on CPAN. 
+number of previous releases still on CPAN.
 
 After a successful release, the plugin displays
 the releases of the distribution still kicking around on CPAN,
@@ -23,7 +23,7 @@ to do some cleanup.
 
 =over
 
-=item L<App-PAUSE-cleanup|https://metacpan.org/release/App-PAUSE-cleanup> 
+=item L<App-PAUSE-cleanup|https://metacpan.org/release/App-PAUSE-cleanup>
 
 CLI utility to list and help you delete easily your distributions on CPAN.
 
@@ -51,6 +51,15 @@ has mcpan => (
     default => sub { MetaCPAN::Client->new },
 );
 
+has total_nbr => (
+    traits => [ 'Counter' ],
+    is => 'rw',
+    default => 0,
+    handles => { inc_releases => 'inc' },
+);
+
+before total_nbr => sub { $_[0]->releases };
+
 has releases => (
     is => 'ro',
     traits => [ 'Array' ],
@@ -61,13 +70,15 @@ has releases => (
     lazy => 1,
     default => sub {
         my $self = shift;
-        
+
         my $releases = $self->mcpan->release({
             distribution => $self->zilla->name
         });
         my @releases;
 
         while( my $r = $releases->next ) {
+            $self->inc_releases;
+            next if $r->status eq 'backpan';
             my( $version, $date ) = map { $r->$_ } qw/ version date /;
             $date =~ s/T.*//;
             push @releases, [ 'v'.$version, $date ];
@@ -79,6 +90,8 @@ has releases => (
 
 sub after_release {
     my $self = shift;
+
+    $self->log( sprintf "Total number of releases: %d", $self->total_nbr );
 
     $self->log( $self->nbr_releases . " old releases are lingering on CPAN" );
     $self->log( "\t" . join ', ', @$_ ) for $self->all_releases;

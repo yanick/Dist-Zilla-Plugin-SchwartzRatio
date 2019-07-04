@@ -1,18 +1,11 @@
-Revision history for {{$dist->name}}
+Revision history for Dist-Zilla-Plugin-SchwartzRatio
 
-{{$NEXT}}
-  [ API CHANGES ]
-
+0.3.3 2019-07-04
   [ BUG FIXES ]
     - don't count the releases on backpan.
 
-  [ DOCUMENTATION ]
-
-  [ ENHANCEMENTS ]
-
-  [ NEW FEATURES ]
-
   [ STATISTICS ]
+    - code churn: 10 files changed, 164 insertions(+), 60 deletions(-)
 
 0.3.2 2017-07-05
   - drop the requirement to perl 5.14.

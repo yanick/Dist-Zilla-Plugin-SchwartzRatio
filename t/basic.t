@@ -9,7 +9,6 @@ use Dist::Zilla::Plugin::SchwartzRatio;
 
 use Test::MockObject;
 use MetaCPAN::Client;
-use List::Lazy qw/ lazy_fixed_list /;
 
 package FakeRelease {
     use Moose;

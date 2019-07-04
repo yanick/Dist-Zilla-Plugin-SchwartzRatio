@@ -4,7 +4,6 @@ Revision history for {{$dist->name}}
   [ API CHANGES ]
 
   [ BUG FIXES ]
-    - don't count the releases on backpan.
 
   [ DOCUMENTATION ]
 
@@ -13,6 +12,13 @@ Revision history for {{$dist->name}}
   [ NEW FEATURES ]
 
   [ STATISTICS ]
+
+0.3.3 2019-07-04
+  [ BUG FIXES ]
+    - don't count the releases on backpan.
+
+  [ STATISTICS ]
+    - code churn: 10 files changed, 164 insertions(+), 60 deletions(-)
 
 0.3.2 2017-07-05
   - drop the requirement to perl 5.14.

@@ -9,7 +9,7 @@ In dist.ini:
 
 =head1 DESCRIPTION
 
-The Schwartz Ratio of CPAN is the number of number of latest
+The Schwartz Ratio of CPAN is the number of latest
 releases over the total number of releases that CPAN has. For
 a single distribution, it boils down to the less exciting
 number of previous releases still on CPAN.

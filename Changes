@@ -4,6 +4,7 @@ Revision history for {{$dist->name}}
   [ API CHANGES ]
 
   [ BUG FIXES ]
+    - quote 'next' so it's not confusing to the parser.
 
   [ DOCUMENTATION ]
 

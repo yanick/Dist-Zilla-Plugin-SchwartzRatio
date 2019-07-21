@@ -4,7 +4,6 @@ Revision history for {{$dist->name}}
   [ API CHANGES ]
 
   [ BUG FIXES ]
-    - quote 'next' so it's not confusing to the parser.
 
   [ DOCUMENTATION ]
 
@@ -13,6 +12,13 @@ Revision history for {{$dist->name}}
   [ NEW FEATURES ]
 
   [ STATISTICS ]
+
+0.3.4 2019-07-21
+  [ BUG FIXES ]
+    - quote 'next' so it's not confusing to the parser.
+
+  [ STATISTICS ]
+    - code churn: 2 files changed, 9 insertions(+), 3 deletions(-)
 
 0.3.3 2019-07-04
   [ BUG FIXES ]

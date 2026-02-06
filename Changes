@@ -11,6 +11,9 @@ Revision history for {{$dist->name}}
 
   [ NEW FEATURES ]
 
+  [ MAINTENANCE ]
+  - Move testing to Test2.
+
   [ STATISTICS ]
 
 0.3.4 2019-07-21

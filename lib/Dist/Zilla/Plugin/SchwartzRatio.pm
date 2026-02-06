@@ -31,12 +31,14 @@ CLI utility to list and help you delete easily your distributions on CPAN.
 
 =cut
 
-use 5.14.0;
+use 5.20.0;
 use strict;
 use warnings;
 
 use List::UtilsBy qw/ sort_by /;
 use MetaCPAN::Client;
+
+use feature qw/ signatures /;
 
 use Moose;
 
@@ -68,8 +70,7 @@ has releases => (
         nbr_releases => 'count',
     },
     lazy => 1,
-    default => sub {
-        my $self = shift;
+    default => sub($self) {
 
         my $releases = $self->mcpan->release({
             distribution => $self->zilla->name
@@ -88,8 +89,7 @@ has releases => (
     },
 );
 
-sub after_release {
-    my $self = shift;
+sub after_release($self,@) {
 
     $self->log( sprintf "Total number of releases: %d", $self->total_nbr );
 
